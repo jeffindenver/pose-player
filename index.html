@@ -14,13 +14,19 @@
 <body>
   <div id="image-target"></div>
   <div>
-    <input type="file" id="filepicker" class="pickDirectory" name="fileList" webkitdirectory multiple>
-    Pick Directory</input>
-    <ul id="output-target"></ul>
+    <input type="file"
+           id="filepicker"
+           class="pickDirectory"
+           name="fileList"
+           webkitdirectory multiple></input>
   </div>
-  <div>
-    <img src="c:/users/jeffa/pictures/figure drawing/model-images/extra-model-images/innabg012_11.jpg" alt="pose">
+  <div class="playbackContainer">
+    <div class="playbackControl">
+      <button class="play">Play</button>
+      <button class="pause">Pause</button>
+    </div>
   </div>
+
 
   <script src="./js/pose-player.js"></script>
   <script src="./js/directory-reader.js"></script>

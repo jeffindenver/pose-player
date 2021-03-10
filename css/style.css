@@ -1,4 +1,32 @@
 .pickDirectory {
-  /* */
+  padding: 20px;
+  height: 40px;
+  background-color: darkgrey;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
   font-family: 'Courier New', Courier, monospace ;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80vw;
+  height: 80vh;
+}
+
+.playbackControl {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: aqua;
+  height: 60px;
+  position: absolute;
+  bottom: 20px;
 }

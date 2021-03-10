@@ -37,13 +37,16 @@ button {
 }
 
 h1 {
+  font-family: 'Fredericka the Great', Helvetica;
+  /* font-family: 'Cabin Sketch', Helvetica; */
   text-align: center;
   color: #2b2b2b;
 }
 
 img {
   display: block;
-  margin-left: auto;
+  margin-top: 20px;
+  margin-left: 200px;
   margin-right: auto;
   padding-left: 100px;
   width: fit-content;
@@ -53,13 +56,39 @@ img {
 }
 
 nav {
+  float: left;
   background-image: linear-gradient(to bottom, #8af731, #f79e31);
   background-color: #2b2b2b;
   position: absolute;
   padding: 10px;
   width: 200px;
-  height: 99vh;
+  height: 99%;
   margin-right: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+.copyright {
+  width: 165px;
+  text-align: center;
+  display: block;
+  position: absolute;
+  bottom: 20px;
+}
+
+.flex-start-container {
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flex-end-container {
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .instructions, .notifications {
@@ -108,7 +137,6 @@ nav {
   cursor: pointer;
   font-weight: 400;
   font-size: 16pt;
-  /*  divider  */
   position: absolute;
   bottom: 20;
 }
@@ -124,7 +152,7 @@ nav {
   border-style: solid;
   margin-left: auto;
   margin-right: auto;
-  width: 170px;
+  width: 165px;
   position: absolute;
   top: 600px;
   padding: 10px;
@@ -157,7 +185,6 @@ p {margin-bottom: 1rem;}
 
 h1, h2, h3, h4, h5 {
   margin: 3rem 0 1.38rem;
-  font-family: 'Poppins', sans-serif;
   font-weight: 400;
   line-height: 1.3;
 }

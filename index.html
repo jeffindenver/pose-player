@@ -2,11 +2,15 @@
 <html>
 
 <head>
+  <title>PosePlayer</title>
   <meta name="author" content="Jeff Shepherd">
   <meta name="description" content="pose player">
   <meta name="keywords" content="quick pose, timed pose, drawing, gesture">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -16,12 +20,8 @@
 <body>
   <nav>
     <div>
-      <h1 style="text-align: center;">Pose Player</h1>
-      <input type="file"
-             id="filepicker"
-             class="pickDirectory"
-             name="fileList"
-             webkitdirectory multiple>
+      <h1>Pose Player</h1>
+      <input type="file" id="filepicker" class="pickDirectory" name="fileList" webkitdirectory multiple>
       </input>
     </div>
     <div class="instructions">
@@ -32,21 +32,47 @@
       </p>
     </div>
 
-    <div class="notifications text-small"></div>
+    <div class="notifications text_small"></div>
 
     <div class="playbackControlContainer">
-      <p class="center">play controls</p>
-      <div class="playbackControl">
-        <button class="play fa fa-play" alt="play button"></button>
-        <button class="pause fa fa-pause" alt="pause button"></button>
-      </div>
+      <h4 class="center" style="margin-top: 0">play controls</h4>
+        <p class="text_small" style="margin-bottom: 0">please select your timing</p>
+        <div class="flex-start-container">
+          <div>
+            <input type="radio" id="thirty" name="timing" value=30>
+            <label for="thirty">30</label><br>
+          </div>
+          <div> <input type="radio" id="sixty" name="timing" value=60 checked>
+            <label for="sixty">60</label><br>
+          </div>
+          <div>
+            <input type="radio" id="onetwenty" name="timing" value=120>
+            <label for="onetwenty">120</label>
+          </div>
+          <div>
+            <input type="radio" id="threehundred" name="timing" value=300>
+            <label for="threehundred">300</label>
+          </div>
+          <div>
+            <input type="radio" id="sixhundred" name="timing" value=600>
+            <label for="threehundred">600</label>
+          </div>
+        </div>
+
+        <div class="playbackControl">
+          <button class="play fa fa-play" alt="play button"></button>
+          <button class="pause fa fa-pause" alt="pause button"></button>
+        </div>
+        <br><br>
+        <div class="copyright text_small">
+          &copy; Jeff Shepherd
+        </div>
     </div>
   </nav>
 
-  <div id="image-target"></div>
+  <div class="flex-end-container" id="image-target"></div>
 
   <script src="./js/pose-player.js"></script>
-  <script src="./js/directory-reader.js"></script>
 </body>
 
 

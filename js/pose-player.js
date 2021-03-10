@@ -2,7 +2,7 @@
 
 $(function () {
 
-  let duration = 5000;
+  let duration = 60;
   let index = 1;
   let timerID;
   let images = [];
@@ -31,10 +31,29 @@ $(function () {
 
   $(".pause").click( () => {
     clearInterval(timerID);
+    $(".notifications").html("Pose Player paused");
     console.log("Timer stopped");
   });
 
-  $(".play").click(startTimer);
+  $(".play").click(initTimer);
+
+  $("input[type='radio'][name='timing']").click( () => {
+    duration = $("input[type='radio'][name='timing']:checked").val();
+  });
+
+  function initTimer() {
+    let milliseconds = duration * 1000;
+    console.log("milliseconds: " + milliseconds);
+    startTimer(milliseconds);
+  }
+
+  function startTimer(milliseconds) {
+    timerID = setInterval(poseTimer, milliseconds);
+    console.log("Timer started");
+    flashElement($(".notifications"));
+    $(".notifications").html("Pose Player playing");
+
+  }
 
   function poseTimer() {
     if (index === images.length) {
@@ -44,9 +63,8 @@ $(function () {
     index++;
   }
 
-  function startTimer() {
-    timerID = setInterval(poseTimer, duration);
-    console.log("Timer started");
+  function flashElement(element) {
+    element.fadeOut(500).fadeIn(500);
   }
 
 });

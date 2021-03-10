@@ -18,11 +18,15 @@ $(function () {
     for (let i = 0; i < files.length; i++) {
       images.push(URL.createObjectURL(files[i]));
     }
-    // attempt to display the first image
     currentPose.append(pose);
-    // load first image before timer starts
     pose.attr("src", images[0]);
 
+    $(".notifications").html("Select a time period for your quick poses. \
+      Then hit play. The default period is 60 seconds.");
+
+    $(".notifications").css("display", "block");
+
+    $(this).blur();
   });
 
   $(".pause").click( () => {
@@ -30,7 +34,6 @@ $(function () {
     console.log("Timer stopped");
   });
 
-  // play each image for a duration of time
   $(".play").click(startTimer);
 
   function poseTimer() {

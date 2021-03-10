@@ -1,32 +1,157 @@
-.pickDirectory {
-  padding: 20px;
-  height: 40px;
-  background-color: darkgrey;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  font-family: 'Courier New', Courier, monospace ;
+/*
+colors
+yellow: #edf731
+green: #8af731
+orange: #f79e31
+dark grey: #2b2b2b
+
+Scale 1.250 - major third
+3.052rem/48.83px
+2.441rem/39.06px
+1.953rem/31.25px
+1.563rem/25.00px
+1.25rem/20.00px
+1rem/16.00px
+0.8rem/12.80px
+0.64rem/10.24px
+0.512rem/8.19px
+0.41rem/6.55px
+
+*/
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #2b2b2b;
+}
+
+button {
+  background-color: lightgrey;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+  color: #2b2b2b;
 }
 
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80vw;
-  height: 80vh;
+  padding-left: 100px;
+  width: fit-content;
+  height: fit-content;
+  max-width: 900px;
+  max-height: 900px;
+}
+
+nav {
+  background-image: linear-gradient(to bottom, #8af731, #f79e31);
+  background-color: #2b2b2b;
+  position: absolute;
+  top: 2px;
+  padding: 10px;
+  width: 200px;
+  height: 97vh;
+  margin-right: 5px;
+}
+
+.instructions {
+  font-size: small;
+  display: block;
+  position: absolute;
+  top: 240px;
+}
+
+.pickDirectory::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.pickDirectory::before {
+  background-color: #f79e31;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  padding: 20px;
+  width: 150px;
+  max-width: 160px;
+  text-align: center;
+  content: 'select files';
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 16pt;
+  /*  divider  */
+  position: absolute;
+  bottom: 20;
+}
+
+.pickDirectory:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.playbackControlContainer {
+  text-align: center;
+  border-radius: 10px;
+  border: black;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+  width: 170px;
+  position: absolute;
+  top: 60%;
+  padding: 10px;
 }
 
 .playbackControl {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
-  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  background-color: aqua;
+  background-color: rgb(24, 88, 67);
   height: 60px;
-  position: absolute;
-  bottom: 20px;
+  position: relative;
+  top: 60%;
+  width: 80%;
+  border-radius: 10px;
 }
+
+/* Type Scaling */
+html {font-size: 100%;} /*16px*/
+
+body {
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+p {margin-bottom: 1rem;}
+
+h1, h2, h3, h4, h5 {
+  margin: 3rem 0 1.38rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.052rem;
+}
+
+h2 {font-size: 2.441rem;}
+
+h3 {font-size: 1.953rem;}
+
+h4 {font-size: 1.563rem;}
+
+h5 {font-size: 1.25rem;}
+
+small, .text_small {font-size: 0.8rem;}

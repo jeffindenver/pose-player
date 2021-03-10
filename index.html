@@ -7,26 +7,40 @@
   <meta name="keywords" content="quick pose, timed pose, drawing, gesture">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <div id="image-target"></div>
-  <div>
-    <input type="file"
-           id="filepicker"
-           class="pickDirectory"
-           name="fileList"
-           webkitdirectory multiple></input>
-  </div>
-  <div class="playbackContainer">
-    <div class="playbackControl">
-      <button class="play">Play</button>
-      <button class="pause">Pause</button>
+  <nav>
+    <div>
+      <h1 style="text-align: center;">Pose Player</h1>
+      <input type="file"
+             id="filepicker"
+             class="pickDirectory"
+             name="fileList"
+             webkitdirectory multiple>
+      </input>
     </div>
-  </div>
+    <div class="instructions">
+      <p>This pages uses non-standard file library
+        that is not yet supported on all browsers.
+        If you find that it does not function, please
+        try either Chrome, Opera, or Firefox browsers.
+      </p>
+    </div>
+    <div class="playbackControlContainer">
+      <p class="center">play controls</p>
+      <div class="playbackControl">
+        <button class="play fa fa-play" alt="play button"></button>
+        <button class="pause fa fa-pause" alt="pause button"></button>
+      </div>
+    </div>
+  </nav>
 
+  <div id="image-target"></div>
 
   <script src="./js/pose-player.js"></script>
   <script src="./js/directory-reader.js"></script>

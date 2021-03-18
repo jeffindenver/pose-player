@@ -95,10 +95,12 @@ nav {
   font-size: small;
   display: block;
   position: absolute;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .instructions {
-  top: 240px;
+  top: 260px;
 }
 
 .notifications {
@@ -143,6 +145,12 @@ nav {
 
 .pickDirectory:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.pickRandom {
+  display: block;
+  position: absolute;
+  top: 240px;
 }
 
 .playbackControlContainer {

@@ -1,0 +1,19 @@
+# docs
+.txt
+*.doc*
+
+# IDE
+.vscode
+.idea
+
+# Node dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+#other
+/discussion

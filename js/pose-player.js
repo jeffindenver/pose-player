@@ -9,6 +9,20 @@ $(function () {
   let currentPose = $("#image-target");
   let pose = $('<img>');
 
+  // alternative timer
+  /*
+    Instead of using setInterval for the images, I could use
+    setInvterval for the clock. When the clock is equal to the selected
+    duration, change the image and reset the clock to zero and repeat.
+    This eliminates the issue with coordinating two intervals.
+  */
+
+  /*
+    @TODO Create a randomize function. 1. make deep copy of array. 2. Iterate
+    over entire array and swap each element with a random element from 0 to the
+    length of the array.
+   */
+
   //jquery events
   $(".pickDirectory").change((event) => {
 
@@ -18,6 +32,9 @@ $(function () {
     for (let i = 0; i < files.length; i++) {
       images.push(URL.createObjectURL(files[i]));
     }
+
+    images.forEach(console.log);
+
     currentPose.append(pose);
     pose.attr("src", images[0]);
 
@@ -38,7 +55,7 @@ $(function () {
   $(".play").click(initTimer);
 
   $("input[type='radio'][name='timing']").click( () => {
-    duration = $("input[type='radio'][name='timing']:checked").val();
+    duration = getSelectedTime();
   });
 
   function initTimer() {
@@ -50,9 +67,10 @@ $(function () {
   function startTimer(milliseconds) {
     timerID = setInterval(poseTimer, milliseconds);
     console.log("Timer started");
-    flashElement($(".notifications"));
-    $(".notifications").html("Pose Player playing");
 
+    flashElement($(".notifications"));
+
+    $(".notifications").html("Pose Player playing");
   }
 
   function poseTimer() {
@@ -64,7 +82,10 @@ $(function () {
   }
 
   function flashElement(element) {
-    element.fadeOut(500).fadeIn(500);
+    element.fadeOut(50).fadeIn(50).fadeOut(400).fadeIn(600);
   }
 
+  function getSelectedTime() {
+    return $("input[type='radio'][name='timing']:checked").val();
+  }
 });

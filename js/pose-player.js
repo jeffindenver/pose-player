@@ -4,7 +4,8 @@ $(function () {
 
   let duration = 60;
   let index = 1;
-  let timerID;
+  // let timerID;
+  let clockID;
   let originalImageList = [];
   let currentImageList = [];
   let currentPose = $("#image-target");
@@ -19,80 +20,97 @@ $(function () {
     duration, change the image and reset the clock to zero and repeat.
     This eliminates the issue with coordinating two intervals.
 
-    Another alternative is to use setTimeout. Then have setTimeout inoke the next
+    Another alternative is to use setTimeout. Then have setTimeout
+    callback invoke the next
     timer.
   */
 
   //jquery events
   $(".pickDirectory").change((event) => {
 
-    // assign the list of directory files
     let files = event.target.files;
     console.log("Number of files: " + files.length);
 
-    // Iterate over files and convert them to URL objects
     for (let i = 0; i < files.length; i++) {
-    originalImageList.push(URL.createObjectURL(files[i]));
+      originalImageList.push(URL.createObjectURL(files[i]));
     }
 
-    // copy original list
-    currentImageList = originalImageList;
-
-    currentPose.append(pose);
-    pose.attr("src", currentImageList[0]);
-
-    $(".notifications").html("Select a time period for your quick poses. \
-      Then hit play. The default period is 60 seconds.");
-
-    $(".notifications").css("display", "block");
-
+    setCurrentList();
+    notify("Select a time period for your quick poses.Then hit play.")
     $(this).blur();
   });
-
 
   $(".pause").click(pauseTimer);
 
   $(".play").click(beginPlayer);
 
-  function beginPlayer () {
-    //TODO: check imageList length, if 0 alert that a directory must be selected
-    resetIndex();
-    getCurrentList();
-    startTimer(getMilliseconds());
-  }
+  $(".stepforward").click(stepForward);
 
-  function pauseTimer() {
-    clearInterval(timerID);
-    $(".notifications").html("Pose Player paused");
-    console.log("Timer stopped");
-  }
+  $(".stepbackward").click(stepBackward);
 
-  $("input[type='radio'][name='timing']").click( () => {
+  $("input[type='radio'][name='timing']").click(() => {
     duration = getSelectedTime();
   });
 
-  $("input[type='checkbox'][name='randomizer']").change ( () => {
+  $("input[type='checkbox'][name='randomizer']").change(() => {
     // check if the list should be randomized
     if ($("input[type='checkbox'][name='randomizer']:checked").val()) {
       isRandom = true;
-      console.log("randomizer is checked");
     } else {
       isRandom = false;
-      console.log("randomizer is unchecked");
     }
   });
 
+  function beginPlayer() {
+    if (currentImageList.length < 1) {
+      notify("Please first select a directory.");
+      return;
+    }
+    notify("Pose Player playing");
+    resetIndex();
+    getCurrentList();
+    loadFirstImage();
+    //startTimer(getMilliseconds());
+    startTimer();
+  }
+
+  function pauseTimer() {
+    clearInterval(clockID);
+    notify("Pose Player paused");
+    console.log("Timer stopped");
+  }
+
+  function stepForward() {
+    clearInterval(clockID);
+    index++;
+    changeImage();
+    //startTimer(getMilliseconds());
+    startTimer();
+  }
+
+  function stepBackward() {
+    clearInterval(clockID);
+    index--;
+    changeImage();
+    //startTimer(getMilliseconds());
+    startTimer();
+  }
+
+  function loadFirstImage() {
+    currentPose.append(pose);
+    pose.attr("src", currentImageList[0]);
+  }
+
   function getCurrentList() {
-    if(isRandom) {
+    if (isRandom) {
       randomizeList();
     } else {
-      currentImageList = originalImageList;
+      setCurrentList();
     }
   }
 
   function getMilliseconds() {
     let milliseconds = duration * 1000;
-    console.log("milliseconds: " + milliseconds);
     return milliseconds;
   }
 
@@ -107,29 +125,59 @@ $(function () {
     console.log("current image list length is " + currentImageList.length);
   }
 
-  function getRandomNum (max) {
+  function getRandomNum(max) {
     return Math.floor(Math.random() * max);
   }
 
-  function startTimer(milliseconds) {
-    timerID = setInterval(changeImage, milliseconds);
+  function startTimer() {
+    // TODO: change this
+    // 1. set an interval for one second
+    // 2. supply a callback that decrements the clock by one second
+    // 3. Once the clock reaches zero, call changeImage
+    clearInterval(clockID);
+    let timeLeft = duration;
+    clockID = setInterval( () => {
+      timeLeft--;
+      updateClock(timeLeft);
+      if (timeLeft === 0) {
+        clearInterval(clockID);
+        changeImage();
+        index++;
+      }
+    }, 1000);
+
+    //timerID = setTimeout(changeImage, getMilliseconds());
     console.log("Timer started");
 
-    flashElement($(".notifications"));
-
-    $(".notifications").html("Pose Player playing");
   }
 
   function changeImage() {
     if (index === currentImageList.length) {
-      pauseTimer();
+      index = 0;
+    }
+    if (index < 0) {
+      index = currentImageList.length;
     }
     pose.attr("src", currentImageList[index]);
-    index++;
+    startTimer();
+  }
+
+  function updateClock(timeLeft) {
+    $(".clock").html(timeLeft);
+  }
+
+  function notify(message) {
+    $(".notifications").css("display", "block");
+    flashElement($(".notifications"));
+    $(".notifications").html(message);
   }
 
   function resetIndex() {
     index = 1;
+  }
+
+  function setCurrentList() {
+    currentImageList = originalImageList;
   }
 
   function flashElement(element) {

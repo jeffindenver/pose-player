@@ -4,7 +4,6 @@ $(function () {
 
   let duration = 60;
   let index = 1;
-  // let timerID;
   let clockID;
   let originalImageList = [];
   let currentImageList = [];
@@ -13,19 +12,9 @@ $(function () {
   let isRandom = true;
 
 
-  // alternative timer
-  /*
-    Instead of using setInterval for the images, I could use
-    setInvterval for the clock. When the clock is equal to the selected
-    duration, change the image and reset the clock to zero and repeat.
-    This eliminates the issue with coordinating two intervals.
-
-    Another alternative is to use setTimeout. Then have setTimeout
-    callback invoke the next
-    timer.
-  */
-
-  //jquery events
+/*******************************************************************************
+ * jQuery events
+ ******************************************************************************/
   $(".pickDirectory").change((event) => {
 
     let files = event.target.files;
@@ -61,6 +50,9 @@ $(function () {
     }
   });
 
+  /*****************************************************************************
+   * other functions
+   ****************************************************************************/
   function beginPlayer() {
     if (currentImageList.length < 1) {
       notify("Please first select a directory.");
@@ -109,11 +101,6 @@ $(function () {
     }
   }
 
-  function getMilliseconds() {
-    let milliseconds = duration * 1000;
-    return milliseconds;
-  }
-
   function randomizeList() {
     // swap the elements in place using random number gen
     for (let i = 0; i < currentImageList.length; i++) {
@@ -130,10 +117,6 @@ $(function () {
   }
 
   function startTimer() {
-    // TODO: change this
-    // 1. set an interval for one second
-    // 2. supply a callback that decrements the clock by one second
-    // 3. Once the clock reaches zero, call changeImage
     clearInterval(clockID);
     let timeLeft = duration;
     clockID = setInterval( () => {
@@ -146,9 +129,7 @@ $(function () {
       }
     }, 1000);
 
-    //timerID = setTimeout(changeImage, getMilliseconds());
     console.log("Timer started");
-
   }
 
   function changeImage() {

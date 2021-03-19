@@ -20,6 +20,8 @@ $(function () {
     let files = event.target.files;
     console.log("Number of files: " + files.length);
 
+    resetOriginalList();
+
     for (let i = 0; i < files.length; i++) {
       originalImageList.push(URL.createObjectURL(files[i]));
     }
@@ -62,7 +64,6 @@ $(function () {
     resetIndex();
     getCurrentList();
     loadFirstImage();
-    //startTimer(getMilliseconds());
     startTimer();
   }
 
@@ -76,7 +77,6 @@ $(function () {
     clearInterval(clockID);
     index++;
     changeImage();
-    //startTimer(getMilliseconds());
     startTimer();
   }
 
@@ -84,7 +84,6 @@ $(function () {
     clearInterval(clockID);
     index--;
     changeImage();
-    //startTimer(getMilliseconds());
     startTimer();
   }
 
@@ -155,6 +154,10 @@ $(function () {
 
   function resetIndex() {
     index = 1;
+  }
+
+  function resetOriginalList() {
+    originalImageList = [];
   }
 
   function setCurrentList() {

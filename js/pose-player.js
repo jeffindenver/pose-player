@@ -64,12 +64,7 @@ $(function () {
   }
 
   function isValidImage(type) {
-    if (type === `image/jpeg` || type === `image/png`) {
-      return true;
-    } else {
-      return false;
-    }
-
+    return (type === `image/jpeg` || type === `image/png`);
   }
 
   function beginPlayer() {

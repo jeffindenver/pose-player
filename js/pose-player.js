@@ -56,15 +56,15 @@ $(function () {
    ****************************************************************************/
   function buildImageList(files) {
     for (let i = 0; i < files.length; i++) {
-      if (isValidImage(files[i])) {
-        console.log(files[i].type);
+      if (isValidImage(files[i].type)) {
+        console.log("added: " + files[i].type);
         originalImageList.push(URL.createObjectURL(files[i]));
       }
     }
   }
 
-  function isValidImage(file) {
-    if (file.type === "image/jpeg" || "image/png") {
+  function isValidImage(type) {
+    if (type === `image/jpeg` || type === `image/png`) {
       return true;
     } else {
       return false;

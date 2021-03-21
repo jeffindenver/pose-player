@@ -5,6 +5,8 @@ $(function () {
   // TODO: put the following variables in a PosePlayer object. Move functions
   // that belong there.
 
+  // TODO: Improve clock visuals
+
   let duration = 60;
   let index = 0;
   let clockID;
@@ -16,30 +18,15 @@ $(function () {
   const FORWARD = 1;
   const BACKWARD = -1;
 
-// TODO: might consider playing the image list in reverse so the last element
-// can be popped after being displayed. Disallow advancing
-// past the first and last elements. Hard stop after element zero is displayed.
-// Then notify: "Congratulations! You finished your gesture drawing session."
-// Finally, maybe offer to reload the list.
-
-/*******************************************************************************
- * jQuery events
- ******************************************************************************/
-
-// TODO: decompose this function
+  /*******************************************************************************
+   * jQuery events
+   ******************************************************************************/
   $(".pickDirectory").change((event) => {
-
-    let files = event.target.files;
-    console.log("Number of files: " + files.length);
-
+    const files = event.target.files;
     resetOriginalList();
-
-    for (let i = 0; i < files.length; i++) {
-      originalImageList.push(URL.createObjectURL(files[i]));
-    }
-
+    buildImageList(files);
     setCurrentList();
-    notify("Select a time period for your quick poses.Then hit play.")
+    notify("Select a time period for your quick poses. Then hit play.");
     $(this).blur();
   });
 
@@ -67,6 +54,24 @@ $(function () {
   /*****************************************************************************
    * other functions
    ****************************************************************************/
+  function buildImageList(files) {
+    for (let i = 0; i < files.length; i++) {
+      if (isValidImage(files[i])) {
+        console.log(files[i].type);
+        originalImageList.push(URL.createObjectURL(files[i]));
+      }
+    }
+  }
+
+  function isValidImage(file) {
+    if (file.type === "image/jpeg" || "image/png") {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
   function beginPlayer() {
     if (currentImageList.length < 1) {
       notify("Please first select a directory.");
@@ -92,7 +97,9 @@ $(function () {
   }
 
   function stepBackward() {
-    // check if index === 0; if true, return without action.
+    if (index === 0) {
+      return;
+    }
     clearInterval(clockID);
     changeImage(BACKWARD);
     startTimer();
@@ -129,7 +136,7 @@ $(function () {
   function startTimer() {
     clearInterval(clockID);
     let timeLeft = duration;
-    clockID = setInterval( () => {
+    clockID = setInterval(() => {
       timeLeft--;
       updateClock(timeLeft);
       if (timeLeft === 0) {

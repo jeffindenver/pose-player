@@ -2,19 +2,31 @@
 
 $(function () {
 
+  // TODO: put the following variables in a PosePlayer object. Move functions
+  // that belong there.
+
   let duration = 60;
-  let index = 1;
+  let index = 0;
   let clockID;
   let originalImageList = [];
   let currentImageList = [];
   let currentPose = $("#image-target");
   let pose = $('<img>');
   let isRandom = true;
+  const FORWARD = 1;
+  const BACKWARD = -1;
 
+// TODO: might consider playing the image list in reverse so the last element
+// can be popped after being displayed. Disallow advancing
+// past the first and last elements. Hard stop after element zero is displayed.
+// Then notify: "Congratulations! You finished your gesture drawing session."
+// Finally, maybe offer to reload the list.
 
 /*******************************************************************************
  * jQuery events
  ******************************************************************************/
+
+// TODO: decompose this function
   $(".pickDirectory").change((event) => {
 
     let files = event.target.files;
@@ -44,7 +56,7 @@ $(function () {
   });
 
   $("input[type='checkbox'][name='randomizer']").change(() => {
-    // check if the list should be randomized
+    // check if user selected randomization
     if ($("input[type='checkbox'][name='randomizer']:checked").val()) {
       isRandom = true;
     } else {
@@ -75,15 +87,14 @@ $(function () {
 
   function stepForward() {
     clearInterval(clockID);
-    index++;
-    changeImage();
+    changeImage(FORWARD);
     startTimer();
   }
 
   function stepBackward() {
+    // check if index === 0; if true, return without action.
     clearInterval(clockID);
-    index--;
-    changeImage();
+    changeImage(BACKWARD);
     startTimer();
   }
 
@@ -123,22 +134,22 @@ $(function () {
       updateClock(timeLeft);
       if (timeLeft === 0) {
         clearInterval(clockID);
-        changeImage();
-        index++;
+        changeImage(FORWARD);
       }
     }, 1000);
-
-    console.log("Timer started");
   }
 
-  function changeImage() {
-    if (index === currentImageList.length) {
+  function changeImage(direction) {
+    index += direction;
+
+    if (index >= currentImageList.length) {
       index = 0;
     }
     if (index < 0) {
       index = currentImageList.length;
     }
     pose.attr("src", currentImageList[index]);
+    console.log("displaying image " + index);
     startTimer();
   }
 
@@ -153,7 +164,7 @@ $(function () {
   }
 
   function resetIndex() {
-    index = 1;
+    index = 0;
   }
 
   function resetOriginalList() {

@@ -7,6 +7,9 @@ $(function () {
 
   // TODO: Improve clock visuals
 
+  // TODO: Improve pause function so that pausing does not reset the list
+  // and continues where it left off.
+
   let duration = 60;
   let index = 0;
   let clockID;
@@ -148,7 +151,7 @@ $(function () {
       index = 0;
     }
     if (index < 0) {
-      index = currentImageList.length;
+      index = currentImageList.length - 1;
     }
     pose.attr("src", currentImageList[index]);
     console.log("displaying image " + index);

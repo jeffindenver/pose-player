@@ -17,7 +17,7 @@ $(function () {
   let currentImageList = [];
   let currentPose = $("#image-target");
   let pose = $('<img>');
-  let isRandom = true;
+  let isRandomized = true;
   const FORWARD = 1;
   const BACKWARD = -1;
 
@@ -46,12 +46,7 @@ $(function () {
   });
 
   $("input[type='checkbox'][name='randomizer']").change(() => {
-    // check if user selected randomization
-    if ($("input[type='checkbox'][name='randomizer']:checked").val()) {
-      isRandom = true;
-    } else {
-      isRandom = false;
-    }
+    isRandomized = $(this.checked).val();
   });
 
   /*****************************************************************************
@@ -109,7 +104,7 @@ $(function () {
   }
 
   function getCurrentList() {
-    if (isRandom) {
+    if (isRandomized) {
       randomizeList();
     } else {
       setCurrentList();

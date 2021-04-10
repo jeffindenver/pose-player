@@ -16,10 +16,7 @@ $(function () {
     const files = event.target.files;
     pp.resetOriginalList();
     pp.buildImageList(files);
-    if(pp.isRandomChecked) {
-      pp.randomizeList();
-    }
-    loadFirstImage();
+    initializePlayer();
     notify("Select a time period for your quick poses. Then hit play.");
     $(this).blur();
   });
@@ -76,7 +73,10 @@ $(function () {
     startTimer();
   }
 
-  function loadFirstImage() {
+  function initializePlayer() {
+    if(pp.isRandomChecked) {
+      pp.randomizeList();
+    }
     pp.timeLeft = pp.duration;
     pp.currentPose.append(pp.pose);
     pp.pose.attr("src", pp.currentImageList[0]);

@@ -34,6 +34,7 @@ $(function () {
 
   $("input[type='radio'][name='timing']").click(() => {
     pp.duration = getSelectedTime();
+    pp.timeLeft = pp.duration;
   });
 
   $("input[type='checkbox'][name='randomizer']").change(() => {
@@ -60,6 +61,7 @@ $(function () {
 
   function stepForward() {
     clearInterval(pp.clockID);
+    pp.timeLeft = pp.duration;
     changeImage(FORWARD);
     startTimer();
   }
@@ -68,24 +70,26 @@ $(function () {
     if (pp.index === 0) {
       return;
     }
+    pp.timeLeft = pp.duration;
     clearInterval(pp.clockID);
     changeImage(BACKWARD);
     startTimer();
   }
 
   function loadFirstImage() {
+    pp.timeLeft = pp.duration;
     pp.currentPose.append(pp.pose);
     pp.pose.attr("src", pp.currentImageList[0]);
   }
 
   function startTimer() {
-    pp.timeLeft = pp.duration;
     clearInterval(pp.clockID);
     pp.clockID = setInterval(() => {
       pp.timeLeft--;
       updateClock(pp.timeLeft);
       if (pp.timeLeft === 0) {
         clearInterval(pp.clockID);
+        pp.timeLeft = pp.duration;
         changeImage(FORWARD);
       }
     }, 1000);

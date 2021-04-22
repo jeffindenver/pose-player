@@ -42,7 +42,7 @@ function PosePlayer() {
   }
 
   this.randomizeList = function () {
-    // swap the elements in place using random number gen
+    // swap the elements using random number gen
     for (let i = 0; i < this.currentImageList.length; i++) {
       let holdingBucket = this.originalImageList[i];
       let randomIndex = getRandomNum(this.currentImageList.length - 1);

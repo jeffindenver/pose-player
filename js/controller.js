@@ -1,3 +1,9 @@
+/*******************************************************************************
+ * Title: controller.js
+ * Author: Jeff Shepherd
+ * Date: 3/9/2021
+ * Description: The controller holds a reference to the data and handles events.
+ ******************************************************************************/
 "use strict";
 
 $(function () {
@@ -67,8 +73,8 @@ $(function () {
     if (pp.index === 0) {
       return;
     }
-    pp.timeLeft = pp.duration;
     clearInterval(pp.clockID);
+    pp.timeLeft = pp.duration;
     changeImage(BACKWARD);
     startTimer();
   }

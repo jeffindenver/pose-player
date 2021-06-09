@@ -8,11 +8,13 @@
   <meta name="keywords" content="quick pose, timed pose, drawing, gesture">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./css/style.css">
+
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+  <script src="https://use.fontawesome.com/1d440f30da.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
@@ -39,7 +41,7 @@
     <div class="clock">00</div>
 
     <div class="playbackControlContainer">
-      <h4 class="center" style="margin-top: 0">play controls</h4>
+      <p class="center s4" style="margin-top: 0">play controls</p>
         <p class="text_small" style="margin-bottom: 0">please select your timing</p>
         <div class="flex-start-container">
           <div>
@@ -88,8 +90,9 @@
 
   <div class="flex-end-container" id="image-target"></div>
 
-  <script src="./js/controller.js"></script>
+  <script src="./js/image-obj.js"></script>
   <script src="./js/pose-player.js"></script>
+  <script src="./js/controller.js"></script>
 </body>
 
 
